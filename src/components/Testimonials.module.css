@@ -1,0 +1,112 @@
+.section {
+  position: relative;
+  overflow: hidden;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 10% -10% auto;
+  height: 70%;
+  background:
+    radial-gradient(ellipse at center, rgba(255, 240, 186, 0.1), transparent 65%);
+  pointer-events: none;
+}
+
+html[data-theme="light"] .backdrop {
+  background:
+    radial-gradient(ellipse at center, rgba(17, 24, 8, 0.06), transparent 65%);
+}
+
+.intro {
+  margin-bottom: 2.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.card {
+  padding: 1.5rem 1.4rem 1.35rem;
+  border-radius: calc(var(--radius) + 4px);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-elevated) 88%, transparent);
+  backdrop-filter: blur(12px);
+  display: grid;
+  gap: 1rem;
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--green-soft), var(--green-deep));
+  opacity: 0.8;
+}
+
+.shift1 {
+  margin-top: 1.6rem;
+}
+
+.shift2 {
+  margin-top: 0.6rem;
+}
+
+.result {
+  font-family: var(--font-unbounded), system-ui, sans-serif;
+  font-size: 1.05rem;
+  color: var(--green-soft);
+  letter-spacing: -0.02em;
+}
+
+.text {
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+.meta span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  display: block;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--green-muted);
+  border: 1px solid var(--green-line);
+  color: var(--green-soft);
+  font-family: var(--font-unbounded), system-ui, sans-serif;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shift1,
+  .shift2 {
+    margin-top: 0;
+  }
+}

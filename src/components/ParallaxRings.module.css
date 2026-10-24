@@ -1,0 +1,143 @@
+.wrap {
+  position: absolute;
+  inset: -18% -28% auto auto;
+  width: min(780px, 100vw);
+  height: min(780px, 100vw);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--green-line);
+  opacity: 0.55;
+}
+
+.ringA {
+  inset: 6%;
+  border-color: rgba(255, 240, 186, 0.22);
+}
+
+.ringB {
+  inset: 18%;
+  border-color: rgba(255, 240, 186, 0.3);
+}
+
+.ringC {
+  inset: 34%;
+  border-color: rgba(255, 240, 186, 0.18);
+  background:
+    radial-gradient(circle at 42% 38%, rgba(255, 240, 186, 0.12), transparent 58%),
+    radial-gradient(circle at 60% 62%, rgba(17, 24, 8, 0.45), transparent 55%);
+}
+
+html[data-theme="light"] .ringA,
+html[data-theme="light"] .ringB,
+html[data-theme="light"] .ringC {
+  border-color: rgba(17, 24, 8, 0.18);
+}
+
+html[data-theme="light"] .ringC {
+  background:
+    radial-gradient(circle at 42% 38%, rgba(17, 24, 8, 0.08), transparent 58%),
+    radial-gradient(circle at 60% 62%, rgba(17, 24, 8, 0.06), transparent 55%);
+}
+
+.veins {
+  position: absolute;
+  inset: 8%;
+  width: auto;
+  height: auto;
+  opacity: 0.55;
+}
+
+.vein,
+.veinSoft {
+  fill: none;
+  stroke: var(--cream, #fff0ba);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  opacity: 0.4;
+}
+
+html[data-theme="light"] .vein,
+html[data-theme="light"] .veinSoft {
+  stroke: var(--ink, #111808);
+}
+
+.veinSoft {
+  opacity: 0.25;
+  stroke-dasharray: 4 8;
+}
+
+.node {
+  fill: var(--cream, #fff0ba);
+  opacity: 0.7;
+}
+
+html[data-theme="light"] .node {
+  fill: var(--ink, #111808);
+}
+
+.spore {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cream, #fff0ba);
+  top: 42%;
+  left: 48%;
+  opacity: 0.55;
+  animation: drift 7s ease-in-out infinite;
+}
+
+html[data-theme="light"] .spore {
+  background: var(--ink, #111808);
+}
+
+.sporeB {
+  top: 58%;
+  left: 62%;
+  width: 5px;
+  height: 5px;
+  animation-delay: -2.4s;
+}
+
+.sporeC {
+  top: 36%;
+  left: 64%;
+  width: 4px;
+  height: 4px;
+  animation-delay: -4.2s;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(10px, -18px);
+    opacity: 0.75;
+  }
+}
+
+html[data-theme="light"] .ring,
+html[data-theme="light"] .veins {
+  opacity: 0.42;
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    inset: -8% -48% auto auto;
+    opacity: 0.75;
+  }
+}

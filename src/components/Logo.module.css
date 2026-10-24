@@ -1,0 +1,44 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: translateY(-1px);
+}
+
+.mark {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 8px 16px rgba(17, 24, 8, 0.35));
+}
+
+.wordmark {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.name {
+  font-family: var(--font-unbounded), system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.tag {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.compact .mark {
+  width: 36px;
+  height: 36px;
+}
+
+.compact .name {
+  font-size: 1.05rem;
+}

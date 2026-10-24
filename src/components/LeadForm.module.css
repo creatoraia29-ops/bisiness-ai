@@ -1,0 +1,104 @@
+.section {
+  padding-bottom: 7rem;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+.copy {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding: 0.4rem 0;
+}
+
+.points {
+  margin-top: 0.6rem;
+  list-style: none;
+  display: grid;
+  gap: 0.85rem;
+  color: var(--text-muted);
+}
+
+.points li {
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+  position: relative;
+  padding-left: 2.4rem;
+}
+
+.points li::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 1.2rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 4px var(--green-muted);
+}
+
+.formShell {
+  position: relative;
+}
+
+.glow {
+  position: absolute;
+  inset: 8% 4% auto;
+  height: 50%;
+  background: radial-gradient(circle, rgba(255, 240, 186, 0.14), transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+html[data-theme="light"] .glow {
+  background: radial-gradient(circle, rgba(17, 24, 8, 0.08), transparent 70%);
+}
+
+.formCard {
+  position: relative;
+  padding: 1.6rem;
+  border-radius: calc(var(--radius) + 6px);
+  background:
+    linear-gradient(165deg, color-mix(in srgb, var(--green) 10%, var(--bg-elevated)), var(--bg-elevated));
+}
+
+.formTitle {
+  font-family: var(--font-unbounded), system-ui, sans-serif;
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.success {
+  color: var(--success);
+}
+
+.error {
+  color: var(--danger);
+}
+
+@media (max-width: 900px) {
+  .grid,
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

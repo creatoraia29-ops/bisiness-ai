@@ -1,0 +1,114 @@
+.section {
+  overflow: hidden;
+}
+
+.intro {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 2.6rem;
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0.9rem;
+}
+
+.tile {
+  position: relative;
+  padding: 1.55rem 1.45rem;
+  border-radius: calc(var(--radius) + 2px);
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--green) 8%, var(--bg-elevated)), var(--bg-elevated));
+  min-height: 190px;
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.tile::after {
+  content: "";
+  position: absolute;
+  right: -20%;
+  bottom: -35%;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid var(--green-line);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.tile:hover {
+  border-color: var(--green-line);
+  transform: translateY(-3px);
+}
+
+.wide {
+  grid-row: span 2;
+  min-height: 100%;
+  padding: 2rem 1.7rem;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(255, 240, 186, 0.12), transparent 40%),
+    linear-gradient(165deg, color-mix(in srgb, var(--green) 14%, var(--bg-elevated)), var(--bg-elevated));
+}
+
+.wide h3 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  max-width: 10ch;
+}
+
+.mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: var(--green-soft);
+  background: var(--green-muted);
+  border: 1px solid var(--green-line);
+}
+
+.mark svg {
+  width: 24px;
+  height: 24px;
+}
+
+.tile h3 {
+  font-size: 1.2rem;
+}
+
+.tile p {
+  color: var(--text-muted);
+  max-width: 34ch;
+}
+
+.wide p {
+  font-size: 1.05rem;
+  max-width: 28ch;
+}
+
+@media (max-width: 960px) {
+  .bento {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .wide {
+    grid-column: span 2;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+
+  .wide {
+    grid-column: auto;
+  }
+}
