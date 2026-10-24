@@ -1,37 +1,17 @@
-import { promises as fs } from "fs";
-import path from "path";
 import { randomUUID } from "crypto";
-
-const DATA_DIR = path.join(process.cwd(), "data");
-const LEADS_FILE = path.join(DATA_DIR, "leads.json");
-
-async function ensureStore() {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-  try {
-    await fs.access(LEADS_FILE);
-  } catch {
-    await fs.writeFile(LEADS_FILE, "[]", "utf8");
-  }
-}
+import { ensureLeadsTable, getTurso, mapLeadRow } from "./turso";
 
 export async function readLeads() {
-  await ensureStore();
-  const raw = await fs.readFile(LEADS_FILE, "utf8");
-  try {
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-export async function writeLeads(leads) {
-  await ensureStore();
-  await fs.writeFile(LEADS_FILE, JSON.stringify(leads, null, 2), "utf8");
+  await ensureLeadsTable();
+  const result = await getTurso().execute(
+    "SELECT * FROM leads ORDER BY created_at DESC"
+  );
+  return result.rows.map(mapLeadRow);
 }
 
 export async function createLead(payload) {
-  const leads = await readLeads();
+  await ensureLeadsTable();
+
   const lead = {
     id: randomUUID(),
     createdAt: new Date().toISOString(),
@@ -45,17 +25,41 @@ export async function createLead(payload) {
     telegramError: payload.telegramError || null,
   };
 
-  leads.unshift(lead);
-  await writeLeads(leads);
+  await getTurso().execute({
+    sql: `INSERT INTO leads (
+      id, created_at, name, phone, company, message, source, status, telegram_sent, telegram_error
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    args: [
+      lead.id,
+      lead.createdAt,
+      lead.name,
+      lead.phone,
+      lead.company,
+      lead.message,
+      lead.source,
+      lead.status,
+      lead.telegramSent ? 1 : 0,
+      lead.telegramError,
+    ],
+  });
+
   return lead;
 }
 
 export async function updateLeadStatus(id, status) {
-  const leads = await readLeads();
-  const index = leads.findIndex((lead) => lead.id === id);
-  if (index === -1) return null;
+  await ensureLeadsTable();
+  const db = getTurso();
 
-  leads[index] = { ...leads[index], status };
-  await writeLeads(leads);
-  return leads[index];
+  await db.execute({
+    sql: "UPDATE leads SET status = ? WHERE id = ?",
+    args: [status, id],
+  });
+
+  const result = await db.execute({
+    sql: "SELECT * FROM leads WHERE id = ?",
+    args: [id],
+  });
+
+  if (!result.rows.length) return null;
+  return mapLeadRow(result.rows[0]);
 }

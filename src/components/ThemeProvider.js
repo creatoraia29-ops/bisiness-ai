@@ -8,6 +8,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import NeonBackdrop from "./NeonBackdrop";
 
 const ThemeContext = createContext({
   theme: "dark",
@@ -39,7 +40,10 @@ export function ThemeProvider({ children }) {
   const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme]);
 
   return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>
+      <NeonBackdrop />
+      <div className="app-shell">{children}</div>
+    </ThemeContext.Provider>
   );
 }
 

@@ -20,6 +20,8 @@ npm run dev
 | `GEMINI_MODEL` | Модель, по умолчанию `gemini-3.5-flash-lite` |
 | `TELEGRAM_BOT_TOKEN` | Токен бота от @BotFather |
 | `TELEGRAM_CHAT_ID` | ID чата или группы для заявок |
+| `TURSO_DATABASE_URL` | URL базы Turso (libsql://...) |
+| `TURSO_AUTH_TOKEN` | Токен доступа Turso |
 | `ADMIN_PASSWORD` | Пароль входа в `/admin` |
 | `ADMIN_SECRET` | Секрет подписи cookie сессии |
 
@@ -30,4 +32,4 @@ npm run dev
 - Next.js (App Router) + JavaScript
 - framer-motion — параллакс и появление секций
 - Gemini API — чат-помощник
-- Локальный `data/leads.json` — хранение заявок
+- Turso (libSQL) — хранение заявок

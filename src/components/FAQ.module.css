@@ -26,9 +26,8 @@
 .item {
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: color-mix(in srgb, var(--bg-elevated) 90%, transparent);
+  background: var(--bg-elevated);
   overflow: hidden;
-  backdrop-filter: blur(8px);
 }
 
 .trigger {

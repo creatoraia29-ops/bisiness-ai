@@ -29,7 +29,7 @@
   padding: 0.85rem 1rem;
   border-radius: 16px;
   border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+  background: var(--bg-elevated);
   position: relative;
   padding-left: 2.4rem;
 }
@@ -42,8 +42,7 @@
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 4px var(--green-muted);
+  background: var(--text);
 }
 
 .formShell {
@@ -51,24 +50,14 @@
 }
 
 .glow {
-  position: absolute;
-  inset: 8% 4% auto;
-  height: 50%;
-  background: radial-gradient(circle, rgba(255, 240, 186, 0.14), transparent 70%);
-  filter: blur(20px);
-  pointer-events: none;
-}
-
-html[data-theme="light"] .glow {
-  background: radial-gradient(circle, rgba(17, 24, 8, 0.08), transparent 70%);
+  display: none;
 }
 
 .formCard {
   position: relative;
   padding: 1.6rem;
   border-radius: calc(var(--radius) + 6px);
-  background:
-    linear-gradient(165deg, color-mix(in srgb, var(--green) 10%, var(--bg-elevated)), var(--bg-elevated));
+  background: var(--bg-elevated);
 }
 
 .formTitle {
